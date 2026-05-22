@@ -81,7 +81,7 @@ export async function POST(request: Request) {
         if (connection === 'close') {
           if (!pairingCodeRequested) {
             clearTimeout(timeoutId);
-            const errorMessage = lastDisconnect?.error?.output?.payload?.message || lastDisconnect?.error?.message || 'Connection closed unexpectedly';
+            const errorMessage = (lastDisconnect?.error as any)?.output?.payload?.message || lastDisconnect?.error?.message || 'Connection closed unexpectedly';
             reject(new Error(`Connection failed: ${errorMessage}. Please try again.`));
           }
         }
